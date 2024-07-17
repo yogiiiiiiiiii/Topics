@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic and Question Generator</title>
+    <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+    <div class="container">
+        <div id="step1">
+            <h1>Step 1: Enter the number of topics</h1>
+            <form id="topicsForm" onsubmit="generateTopicForms(); return false;">
+                <label for="numTopics">Number of topics:</label>
+                <input type="number" id="numTopics" name="numTopics" min="1" required>
+                <button type="submit">Next</button>
+            </form>
+        </div>
+
+        <div id="step2" style="display:none;">
+            <h1>Step 2: Enter details for each topic</h1>
+            <form id="topicsForm" onsubmit="processForm(event)">
+                <div id="topicsContainer"></div>
+                <button type="submit">Next</button>
+            </form>
+        </div>
+
+        <div id="step3" style="display:none;">
+            <h1>Step 3: Enter question numbers</h1>
+            <form id="questionsForm" onsubmit="processQuestions(event)">
+                <div id="questionsContainer"></div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div id="previewSection" style="display:none;">
+            <h1>CSV Preview</h1>
+            <table id="csvPreviewTable"></table>
+            <button onclick="downloadCSV()">Download CSV</button>
+        </div>
+    </div>
+    <script src="script2.js"></script>
+</body>
+</html>

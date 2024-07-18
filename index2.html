@@ -3,38 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Topic and Question Generator</title>
+    <title>Topic and Question Manager</title>
     <link rel="stylesheet" href="styles2.css">
 </head>
 <body>
     <div class="container">
+        <h1>Topic and Question Manager</h1>
         <div id="step1">
-            <h1>Step 1: Enter the number of topics</h1>
-            <form id="topicsForm" onsubmit="generateTopicForms(); return false;">
-                <label for="numTopics">Number of topics:</label>
-                <input type="number" id="numTopics" name="numTopics" min="1" required>
-                <button type="submit">Next</button>
+            <h2>Step 1: Number of Topics</h2>
+            <form id="numTopicsForm">
+                <label for="numTopics">Enter the number of topics:</label>
+                <input type="number" id="numTopics" min="1" required>
+                <button type="button" onclick="generateTopicForms()">Next</button>
             </form>
         </div>
-
-        <div id="step2" style="display:none;">
-            <h1>Step 2: Enter details for each topic</h1>
+        
+        <div id="step2" style="display: none;">
+            <h2>Step 2: Topic Details</h2>
             <form id="topicsForm" onsubmit="processForm(event)">
                 <div id="topicsContainer"></div>
                 <button type="submit">Next</button>
             </form>
         </div>
-
-        <div id="step3" style="display:none;">
-            <h1>Step 3: Enter question numbers</h1>
+        
+        <div id="step3" style="display: none;">
+            <h2>Step 3: Question Numbers</h2>
             <form id="questionsForm" onsubmit="processQuestions(event)">
                 <div id="questionsContainer"></div>
-                <button type="submit">Submit</button>
+                <button type="submit">Generate Preview</button>
             </form>
         </div>
-
-        <div id="previewSection" style="display:none;">
-            <h1>CSV Preview</h1>
+        
+        <div id="previewSection" style="display: none;">
+            <h2>CSV Preview</h2>
             <table id="csvPreviewTable"></table>
             <button onclick="downloadCSV()">Download CSV</button>
         </div>

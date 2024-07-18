@@ -5,7 +5,6 @@ function generateTopicForms() {
     totalTopics = parseInt(document.getElementById('numTopics').value, 10);
     const topicsContainer = document.getElementById('topicsContainer');
     topicsContainer.innerHTML = '';
-
     for (let i = 1; i <= totalTopics; i++) {
         topicsContainer.innerHTML += `
             <div class="topic-container">
@@ -27,17 +26,14 @@ function generateTopicForms() {
 
 function processForm(event) {
     event.preventDefault();
-
     const topicsForm = document.getElementById('topicsForm');
     const formData = new FormData(topicsForm);
     topicsData = [];
-
     for (let i = 1; i <= totalTopics; i++) {
         const topicName = formData.get(`topicName${i}`);
         const hardQuestions = parseInt(formData.get(`hard${i}`)) || 0;
         const mediumQuestions = parseInt(formData.get(`medium${i}`)) || 0;
         const easyQuestions = parseInt(formData.get(`easy${i}`)) || 0;
-
         topicsData.push({
             topicName,
             hard: hardQuestions,
@@ -48,17 +44,14 @@ function processForm(event) {
             easyNumbers: []
         });
     }
-
     generateQuestionsForms();
 }
 
 function generateQuestionsForms() {
     const questionsContainer = document.getElementById('questionsContainer');
     questionsContainer.innerHTML = '';
-
     topicsData.forEach((topic, index) => {
         const topicNumber = index + 1;
-
         if (topic.hard > 0) {
             questionsContainer.innerHTML += `
                 <div class="question-container">
@@ -67,7 +60,6 @@ function generateQuestionsForms() {
                 </div>
             `;
         }
-
         if (topic.medium > 0) {
             questionsContainer.innerHTML += `
                 <div class="question-container">
@@ -76,7 +68,6 @@ function generateQuestionsForms() {
                 </div>
             `;
         }
-
         if (topic.easy > 0) {
             questionsContainer.innerHTML += `
                 <div class="question-container">
@@ -86,7 +77,6 @@ function generateQuestionsForms() {
             `;
         }
     });
-
     document.getElementById('step2').style.display = 'none';
     document.getElementById('step3').style.display = 'block';
 }
@@ -102,10 +92,8 @@ function generateQuestionInputs(count, name) {
 
 function processQuestions(event) {
     event.preventDefault();
-
     const questionsForm = document.getElementById('questionsForm');
     const formData = new FormData(questionsForm);
-
     topicsData.forEach((topic, index) => {
         const topicNumber = index + 1;
         for (let i = 1; i <= topic.hard; i++) {
@@ -118,18 +106,15 @@ function processQuestions(event) {
             topic.easyNumbers.push(formData.get(`easy${topicNumber}${i}`));
         }
     });
-
     displayCSVPreview();
 }
 
 function displayCSVPreview() {
     const previewTable = document.getElementById('csvPreviewTable');
     previewTable.innerHTML = '';
-
     const header = document.createElement('tr');
     header.innerHTML = '<th>Topic</th><th>Level</th><th>Count</th><th>Questions</th>';
     previewTable.appendChild(header);
-
     topicsData.forEach(topic => {
         if (topic.hardNumbers.length > 0) {
             appendTopicRow(previewTable, topic.topicName, 'hard', topic.hard, topic.hardNumbers);
@@ -141,7 +126,6 @@ function displayCSVPreview() {
             appendTopicRow(previewTable, topic.topicName, 'easy', topic.easy, topic.easyNumbers);
         }
     });
-
     document.getElementById('step3').style.display = 'none';
     document.getElementById('previewSection').style.display = 'block';
 }
@@ -174,7 +158,6 @@ function downloadCSV() {
     });
 
     csvContent += csvRows.join('\n');
-
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
